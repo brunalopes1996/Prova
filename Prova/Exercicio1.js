@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { View, Text, TextInput, StyleSheet } from 'react-native'
+import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
 
   function Exercicio1(){
   const [salarioBase, setSalarioBase] = useState()
@@ -24,7 +24,7 @@ import { View, Text, TextInput, StyleSheet } from 'react-native'
       <TextInput
           value={qtdeHoras}
           onChangeText={setQtdeHoras}
-          placeholder="Digite o salário base:  "
+          placeholder="Digite a quantidade de horas trabalhadas:  "
           style={estilo.input}
       />
       
@@ -35,17 +35,16 @@ import { View, Text, TextInput, StyleSheet } from 'react-native'
               () => {
                 if (qtdeHoras <= 160) {
                     setSalarioFinal((salarioBase / qtdeHoras) * (qtdeHoras))
-                }
-                else if (qtdeHoras < 160) {
-                    setSalarioFinal((salarioBase / qtdeHoras) * (qtdeHoras * 1.5))
+                } else {
+                    let HorasExtras = qtdeHoras - 160;
+                    let valorHoraNormal = (salarioBase / 160)
+                    let ValorHoraExtra = valorHoraNormal + (valorHoraNormal * 0.5);
+                    setSalarioFinal(+salarioBase + (HorasExtras * ValorHoraExtra));
                 }
           } 
         }
       />
-
-        <Text>Preço do Produto: {preco}</Text>
-        <Text>Á Vista: {aVista}</Text>
-        <Text>Parcelado em 3x: {parcela}</Text>
+        <Text>Salário Final é: R$ {Number(salarioFinal).toFixed(2)}</Text>
     </View>
   )
 }
